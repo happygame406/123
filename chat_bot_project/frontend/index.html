@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат-бот поддержки</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> Чат-бот поддержки</h1>
+            <div class="auth-buttons">
+                <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Войти</button>
+                <button id="registerBtn"><i class="fas fa-user-plus"></i> Регистрация</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2><i class="fas fa-comments"></i> Диалог</h2>
+                    <button id="newSessionBtn" class="btn-icon" title="Новая сессия">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button id="clearChatBtn" class="btn-icon" title="Очистить чат">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Сообщения будут здесь -->
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <span>Бот печатает</span>
+                    <div class="dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+                <div class="chat-input">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Введите сообщение..."
+                        maxlength="500"
+                    >
+                    <button id="sendBtn" class="btn-send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <h3><i class="fas fa-history"></i> История сессий</h3>
+                <div class="sessions-list" id="sessionsList">
+                    <!-- Список сессий будет здесь -->
+                </div>
+            </div>
+        </main>
+
+        <div class="modal" id="authModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <form id="authForm">
+                    <input type="text" id="username" placeholder="Имя пользователя" required>
+                    <input type="password" id="password" placeholder="Пароль" required>
+                    <button type="submit" id="submitAuthBtn"></button>
+                    <p id="errorMessage" class="error"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
