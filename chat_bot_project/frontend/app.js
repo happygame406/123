@@ -4,7 +4,6 @@ const API_BASE = 'http://127.0.0.1:8000';
 let currentSessionId = null;
 let isTyping = false;
 
-// DOM Elements
 const chatMessages = document.getElementById('chatMessages');
 const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
@@ -29,17 +28,14 @@ class ChatUI {
     }
 
     initEventListeners() {
-        // Отправка сообщения
         sendBtn.addEventListener('click', () => this.sendMessage());
         messageInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !isTyping) this.sendMessage();
         });
 
-        // Управление чатом
         clearChatBtn.addEventListener('click', () => this.clearChat());
         newSessionBtn.addEventListener('click', () => this.createNewSession());
 
-        // Авторизация
         loginBtn.addEventListener('click', () => this.showAuthModal('login'));
         registerBtn.addEventListener('click', () => this.showAuthModal('register'));
         authModal.querySelector('.close').addEventListener('click', () => this.hideAuthModal());
@@ -50,7 +46,6 @@ class ChatUI {
             this.handleAuth(isLogin);
         });
 
-        // Закрытие модального окна при клике вне его
         window.addEventListener('click', (e) => {
             if (e.target === authModal) this.hideAuthModal();
         });
@@ -60,7 +55,6 @@ class ChatUI {
         const text = messageInput.value.trim();
         if (!text || isTyping) return;
 
-        // Валидация
         if (text.length > 500) {
             this.showError('Сообщение не может быть длиннее 500 символов');
             return;
@@ -73,7 +67,6 @@ class ChatUI {
         this.addMessage(text, 'user');
         messageInput.value = '';
         
-        // Блокировка ввода
         this.showTyping(true);
         isTyping = true;
 
@@ -133,8 +126,6 @@ class ChatUI {
 
     async loadSessions() {
         try {
-            // В реальном приложении здесь был бы запрос к API для получения сессий
-            // Для демонстрации используем localStorage
             const sessions = JSON.parse(localStorage.getItem('chat_sessions')) || [];
             this.renderSessions(sessions);
         } catch (error) {
@@ -260,13 +251,12 @@ class ChatUI {
     }
 }
 
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     new ChatUI();
     
-    // Проверка авторизации
     const token = localStorage.getItem('token');
     if (token) {
         new ChatUI().updateAuthButtons(true);
     }
+
 });
